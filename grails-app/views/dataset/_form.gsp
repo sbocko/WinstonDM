@@ -16,7 +16,7 @@
 		
 	</label>
 	<input type="file" name="dataFile" id="dataFile" />
-	<!-- <g:textField name="dataFile" value="${datasetInstance?.dataFile}"/> -->
+	<%-- <g:textField name="dataFile" value="${datasetInstance?.dataFile}"/> --%>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: datasetInstance, field: 'description', 'error')} ">
@@ -27,13 +27,13 @@
 	<g:textArea name="description" cols="40" rows="5" maxlength="5000" value="${datasetInstance?.description}"/>
 </div>
 
-<!-- <div class="fieldcontain ${hasErrors(bean: datasetInstance, field: 'descriptionFile', 'error')} ">
+<%-- <div class="fieldcontain ${hasErrors(bean: datasetInstance, field: 'descriptionFile', 'error')} ">
 	<label for="descriptionFile">
 		<g:message code="dataset.descriptionFile.label" default="Description File" />
 		
 	</label>
 	<g:textField name="descriptionFile" value="${datasetInstance?.descriptionFile}"/>
-</div> -->
+</div> --%>
 
 <div class="fieldcontain ${hasErrors(bean: datasetInstance, field: 'missingValuePattern', 'error')} ">
 	<label for="missingValuePattern">
@@ -43,21 +43,21 @@
 	<g:textField name="missingValuePattern" value="${datasetInstance?.missingValuePattern}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: datasetInstance, field: 'numberOfMissingValues', 'error')} required">
+<%--<div class="fieldcontain ${hasErrors(bean: datasetInstance, field: 'numberOfMissingValues', 'error')} required">
 	<label for="numberOfMissingValues">
 		<g:message code="dataset.numberOfMissingValues.label" default="Number Of Missing Values" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="numberOfMissingValues" type="number" value="${datasetInstance.numberOfMissingValues}" required=""/>
-</div>
+</div>--%>
 
-<div class="fieldcontain ${hasErrors(bean: datasetInstance, field: 'numberOfInstances', 'error')} required">
+<%--<div class="fieldcontain ${hasErrors(bean: datasetInstance, field: 'numberOfInstances', 'error')} required">
 	<label for="numberOfInstances">
 		<g:message code="dataset.numberOfInstances.label" default="Number Of Instances" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="numberOfInstances" type="number" value="${datasetInstance.numberOfInstances}" required=""/>
-</div>
+</div>--%>
 
 <div class="fieldcontain ${hasErrors(bean: datasetInstance, field: 'attributes', 'error')} ">
 	<label for="attributes">

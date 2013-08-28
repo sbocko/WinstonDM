@@ -1,5 +1,6 @@
 package winston
 
+import org.codehaus.groovy.grails.web.binding.DataBindingUtils;
 import org.springframework.dao.DataIntegrityViolationException
 
 import sk.upjs.winston.groovy.FileUploadService;
@@ -22,19 +23,25 @@ class DatasetController {
     }
 
     def save() {
-		params.remove("dataFile");
-		println params
+//		params.remove("dataFile");
 		def file = request.getFile("dataFile")
 		def fName = file.getOriginalFilename();
+//		params.put("dataFile", fName)
+//		println "params data: ${params.get("dataFile")}"
 		println "filename: ${fName}"
-        def datasetInstance = new Dataset(params)
-		println "dataset: ${datasetInstance}"
+        def datasetInstance = new Dataset()
+		datasetInstance.setTitle(params.get("title"))
+		datasetInstance.setDataFile(fName);
+		datasetInstance.setDescription(params.get("description"))
+		datasetInstance.setMissingValuePattern(params.get("missingValuePattern"))
+//		DataBindingUtils.bindObjectToInstance(datasetInstance, params, ['title','description','dataFile'], [], null)
+		println "dataset ${datasetInstance}"
 		println ""
 		println "file data: ${request.getFile("dataFile").inputStream.text}"
 		println ""
 		def fileUploadService = new FileUploadService()
-		println "${fileUploadService.uploadFile(file, fName, FileUploadService.DATASET_UPLOAD_DIRECTORY)}"
-		println "IT works"
+		fileUploadService.uploadFile(file, fName, FileUploadService.DATASET_UPLOAD_DIRECTORY)
+		println ""
 		
 //		if some error occures
         if (!datasetInstance.save(flush: true)) {
