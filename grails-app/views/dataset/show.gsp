@@ -50,14 +50,14 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${datasetInstance?.descriptionFile}">
+				<%-- <g:if test="${datasetInstance?.descriptionFile}">
 				<li class="fieldcontain">
 					<span id="descriptionFile-label" class="property-label"><g:message code="dataset.descriptionFile.label" default="Description File" /></span>
 					
 						<span class="property-value" aria-labelledby="descriptionFile-label"><g:fieldValue bean="${datasetInstance}" field="descriptionFile"/></span>
 					
 				</li>
-				</g:if>
+				</g:if> --%>
 			
 				<g:if test="${datasetInstance?.missingValuePattern}">
 				<li class="fieldcontain">

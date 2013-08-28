@@ -1,9 +1,8 @@
 package winston
 
-import org.codehaus.groovy.grails.web.binding.DataBindingUtils;
 import org.springframework.dao.DataIntegrityViolationException
 
-import sk.upjs.winston.groovy.FileUploadService;
+import sk.upjs.winston.groovy.FileUploadService
 
 class DatasetController {
 
@@ -23,18 +22,14 @@ class DatasetController {
     }
 
     def save() {
-//		params.remove("dataFile");
 		def file = request.getFile("dataFile")
 		def fName = file.getOriginalFilename();
-//		params.put("dataFile", fName)
-//		println "params data: ${params.get("dataFile")}"
 		println "filename: ${fName}"
         def datasetInstance = new Dataset()
 		datasetInstance.setTitle(params.get("title"))
 		datasetInstance.setDataFile(fName);
 		datasetInstance.setDescription(params.get("description"))
 		datasetInstance.setMissingValuePattern(params.get("missingValuePattern"))
-//		DataBindingUtils.bindObjectToInstance(datasetInstance, params, ['title','description','dataFile'], [], null)
 		println "dataset ${datasetInstance}"
 		println ""
 		println "file data: ${request.getFile("dataFile").inputStream.text}"

@@ -30,7 +30,7 @@
 					
 						<g:sortableColumn property="description" title="${message(code: 'dataset.description.label', default: 'Description')}" />
 					
-						<g:sortableColumn property="descriptionFile" title="${message(code: 'dataset.descriptionFile.label', default: 'Description File')}" />
+						<%-- <g:sortableColumn property="descriptionFile" title="${message(code: 'dataset.descriptionFile.label', default: 'Description File')}" /> --%>
 					
 						<g:sortableColumn property="missingValuePattern" title="${message(code: 'dataset.missingValuePattern.label', default: 'Missing Value Pattern')}" />
 					
@@ -48,7 +48,7 @@
 					
 						<td>${fieldValue(bean: datasetInstance, field: "description")}</td>
 					
-						<td>${fieldValue(bean: datasetInstance, field: "descriptionFile")}</td>
+						<%-- <td>${fieldValue(bean: datasetInstance, field: "descriptionFile")}</td> --%>
 					
 						<td>${fieldValue(bean: datasetInstance, field: "missingValuePattern")}</td>
 					
