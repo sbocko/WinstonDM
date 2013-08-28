@@ -1,12 +1,12 @@
 package winston
 
 class Dataset {
-	private static final String TITLE_VAR = "title"
-	private static final String DATAFILE_VAR = "dataFile"
-	private static final String DESCRIPTION_VAR = "description"
-	private static final String MISSING_VALUE_PATTERN_VAR = "missingValuePattern"
-	private static final String TITLE_NUMBER_OF_MISSING_VALUES_VAR = "numberOfMissingValues"
-	private static final String NUMBER_OF_INSTANCES_VAR = "numberOfInstances"
+	public static final String TITLE_VAR = "title"
+	public static final String DATA_FILE_VAR = "dataFile"
+	public static final String DESCRIPTION_VAR = "description"
+	public static final String MISSING_VALUE_PATTERN_VAR = "missingValuePattern"
+	public static final String NUMBER_OF_MISSING_VALUES_VAR = "numberOfMissingValues"
+	public static final String NUMBER_OF_INSTANCES_VAR = "numberOfInstances"
 	
 	
 	String title
@@ -19,7 +19,7 @@ class Dataset {
 
     static constraints = {
     	title()
-    	dataFile()
+    	dataFile(nullable:false)
     	description(maxSize:5000, nullable:true)
     	missingValuePattern(nullable:true)
     	numberOfMissingValues()
