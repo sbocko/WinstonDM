@@ -31,7 +31,7 @@
 				<g:hiddenField name="id" value="${datasetInstance?.id}" />
 				<g:hiddenField name="version" value="${datasetInstance?.version}" />
 				<fieldset class="form">
-					<g:render template="form"/>
+					<g:render template="edit-form"/>
 				</fieldset>
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />

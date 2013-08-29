@@ -59,7 +59,7 @@
 	<g:field name="numberOfInstances" type="number" value="${datasetInstance.numberOfInstances}" required=""/>
 </div>--%>
 
-<div class="fieldcontain ${hasErrors(bean: datasetInstance, field: 'attributes', 'error')} ">
+<%-- <div class="fieldcontain ${hasErrors(bean: datasetInstance, field: 'attributes', 'error')} ">
 	<label for="attributes">
 		<g:message code="dataset.attributes.label" default="Attributes" />
 		
@@ -70,9 +70,11 @@
     <li><g:link controller="attribute" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
 </g:each>
 <li class="add">
+<li class="add">
+<li class="add">
 <g:link controller="attribute" action="create" params="['dataset.id': datasetInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'attribute.label', default: 'Attribute')])}</g:link>
 </li>
 </ul>
 
-</div>
+</div> --%>
 
