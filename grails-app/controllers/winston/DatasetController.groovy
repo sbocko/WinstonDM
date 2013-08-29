@@ -1,11 +1,10 @@
 package winston
 
-import groovy.sql.DataSet;
-
+import org.codehaus.groovy.grails.web.context.ServletContextHolder;
 import org.springframework.dao.DataIntegrityViolationException
-import org.springframework.web.multipart.MultipartFile;
-
 import org.springframework.util.StringUtils
+import org.springframework.web.multipart.MultipartFile
+
 import sk.upjs.winston.groovy.FileUploadService
 
 class DatasetController {
@@ -33,7 +32,7 @@ class DatasetController {
 			filename = file.getOriginalFilename();
 			println "filename: ${filename}"
 		}
-		
+
 		//initialize dataset instance
 		def datasetInstance = new Dataset()
 		datasetInstance.setTitle(params.get(Dataset.TITLE_VAR))
@@ -112,7 +111,6 @@ class DatasetController {
 				return
 			}
 		}
-		println "update params: ${params}"
 		datasetInstance.properties = params
 
 		if (!datasetInstance.save(flush: true)) {
@@ -139,6 +137,7 @@ class DatasetController {
 		}
 
 		try {
+			deleteDataFile(datasetInstance.getDataFile())
 			datasetInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [
 				message(code: 'dataset.label', default: 'Dataset'),
@@ -154,7 +153,7 @@ class DatasetController {
 			redirect(action: "show", id: id)
 		}
 	}
-	
+
 	private def getNumberOfMissingValues(MultipartFile file, String missingValuePattern){
 		if(missingValuePattern == null || missingValuePattern.length() == 0){
 			return 0
@@ -162,12 +161,36 @@ class DatasetController {
 		def data = new String(file.getBytes())
 		StringUtils.countOccurrencesOf(data,missingValuePattern)
 	}
-	
-	private def getNumberOfInstances(MultipartFile file){
-		if(file.isEmpty()){
+
+	private def getNumberOfInstances(MultipartFile multipartFile){
+		def result = 0
+		//get storage path
+		def servletContext = ServletContextHolder.servletContext
+		def storagePath = servletContext.getRealPath(FileUploadService.DATASET_UPLOAD_DIRECTORY)
+		
+		def filename = multipartFile.getOriginalFilename()
+		File file = new File("${storagePath}/${filename}")
+		if(!file.exists()){
+			println "file ${file.getPath()} does not exists!"
 			return 0
 		}
-		def data = new String(file.getBytes())
-		return StringUtils.countOccurrencesOf(data,"\n") + 1
+		
+		file.eachLine { line -> 
+			if(line != null && line.trim().length() > 0){
+				result++
+			}
+		}
+		return result
+	}
+	
+	private void deleteDataFile(String filename){
+		//get storage path
+		def servletContext = ServletContextHolder.servletContext
+		def storagePath = servletContext.getRealPath(FileUploadService.DATASET_UPLOAD_DIRECTORY)
+		
+		File file = new File("${storagePath}/${filename}")
+		if(file.exists()){
+			file.delete()
+		}
 	}
 }
