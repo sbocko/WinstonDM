@@ -2,14 +2,6 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: attributeInstance, field: 'attributeType', 'error')} required">
-	<label for="attributeType">
-		<g:message code="attribute.attributeType.label" default="Attribute Type" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select name="attributeType" from="${AttributeType?.values()}" keys="${AttributeType.values()*.name()}" required="" value="${attributeInstance?.attributeType?.name()}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: attributeInstance, field: 'dataset', 'error')} required">
 	<label for="dataset">
 		<g:message code="attribute.dataset.label" default="Dataset" />

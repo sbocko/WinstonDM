@@ -24,8 +24,6 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="attributeType" title="${message(code: 'attribute.attributeType.label', default: 'Attribute Type')}" />
-					
 						<th><g:message code="attribute.dataset.label" default="Dataset" /></th>
 					
 						<g:sortableColumn property="numberOfMissingValues" title="${message(code: 'attribute.numberOfMissingValues.label', default: 'Number Of Missing Values')}" />
@@ -38,9 +36,7 @@
 				<g:each in="${attributeInstanceList}" status="i" var="attributeInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${attributeInstance.id}">${fieldValue(bean: attributeInstance, field: "attributeType")}</g:link></td>
-					
-						<td>${fieldValue(bean: attributeInstance, field: "dataset")}</td>
+						<td><g:link action="show" id="${attributeInstance.id}">${fieldValue(bean: attributeInstance, field: "dataset")}</g:link></td>
 					
 						<td>${fieldValue(bean: attributeInstance, field: "numberOfMissingValues")}</td>
 					

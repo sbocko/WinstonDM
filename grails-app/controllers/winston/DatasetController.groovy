@@ -5,6 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.util.StringUtils
 import org.springframework.web.multipart.MultipartFile
 
+import sk.upjs.winston.groovy.AttributeType;
 import sk.upjs.winston.groovy.FileUploadService
 
 class DatasetController {
@@ -42,6 +43,13 @@ class DatasetController {
 		datasetInstance.setMissingValuePattern(missingValuePattern)
 		datasetInstance.setNumberOfMissingValues(getNumberOfMissingValues(file, missingValuePattern));
 		datasetInstance.setNumberOfInstances(getNumberOfInstances(file))
+		
+		//parse file and get attributes
+//		datasetInstance.
+		StringAttribute attr = new StringAttribute()
+		attr.setTitle("test")
+		datasetInstance.addToAttributes(attr)
+		
 		//println "dataset ${datasetInstance}"
 		println ""
 

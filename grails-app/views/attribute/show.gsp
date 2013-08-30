@@ -23,15 +23,6 @@
 			</g:if>
 			<ol class="property-list attribute">
 			
-				<g:if test="${attributeInstance?.attributeType}">
-				<li class="fieldcontain">
-					<span id="attributeType-label" class="property-label"><g:message code="attribute.attributeType.label" default="Attribute Type" /></span>
-					
-						<span class="property-value" aria-labelledby="attributeType-label"><g:fieldValue bean="${attributeInstance}" field="attributeType"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${attributeInstance?.dataset}">
 				<li class="fieldcontain">
 					<span id="dataset-label" class="property-label"><g:message code="attribute.dataset.label" default="Dataset" /></span>
