@@ -1,28 +1,61 @@
 package sk.upjs.winston.groovy
 
+import sk.upjs.winston.groovy.validator.AttributeDataValidator;
+import sk.upjs.winston.groovy.validator.BooleanAttributeDataValidator
+import sk.upjs.winston.groovy.validator.DefaultAttributeDataValidator
 import winston.Attribute
 
 class DatasetAttributeParser {
 	public static final String DEFAULT_DELIMITER = ","
-	File file
-	int numberOfAttributes
-	public DatasetAttributeParser(File file) {
-		this.file = file;
+	private File file
+	private int numberOfAttributes
+	private int numberOfInstances
+	private String delimiter
+	private String missingValuePattern
+
+	public DatasetAttributeParser(File file, int numberOfInstances, String missingValuePattern) {
+		this.file = file
+		this.numberOfInstances = numberOfInstances
+		this.delimiter = DEFAULT_DELIMITER
+		this.missingValuePattern = missingValuePattern
 		numberOfAttributes = getNumberOfAttributes()
 	}
 
 	public List<Attribute> getAttributes(){
+		List<Attribute> resultAttrs = new ArrayList<Attribute>()
+		String[][] data = parseDatasetToArrays()
+		for(int i = 0; i < data.length; i++){
+			resultAttrs.add(createAttributeFromData(data[i]))
+		}
+		return resultAttrs
+	}
+	
+	private Attribute createAttributeFromData(String[] attrData){
+		BooleanAttributeDataValidator badv = new BooleanAttributeDataValidator(attrData, missingValuePattern);
+		if(badv.isApplicableToData()){
+			return badv.createAttributeFromData()
+		}
+		
+		return new DefaultAttributeDataValidator(attrData, missingValuePattern).createAttributeFromData()
 	}
 
-	private List<Attribute> parseDataset(){
+	private String[][] parseDatasetToArrays(){
+		String[][] resultData = new String[numberOfAttributes][numberOfInstances]
+		int actLine = 0
+		file.eachLine { line ->
+			def values = line.split(delimiter)
+			values.eachWithIndex { val, idx ->
+				resultData[idx][actLine] = val.trim()
+			}
+			actLine++ 
+		}
+		return resultData
 	}
 
 	private int getNumberOfAttributes(){
-		def delimiter = DEFAULT_DELIMITER
-		def line
-		file.withReader { line = it.readLine() }
-		def result = line.split(delimiter).length
-		println "length: ${result}"
+		def firstLine
+		file.withReader { firstLine = it.readLine() }
+		def result = firstLine.split(delimiter).length
 		return result
 	}
 }

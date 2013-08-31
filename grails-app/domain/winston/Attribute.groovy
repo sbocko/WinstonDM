@@ -7,6 +7,7 @@ class Attribute {
 	static belongsTo = [dataset: Dataset]
 
     static constraints = {
+		title(nullable:true) 
     }
 
     String toString(){

@@ -34,21 +34,29 @@ class DatasetController {
 			println "filename: ${filename}"
 		}
 		
+		int numberOfInstances = getNumberOfInstances(file)
+		
 		//get storage path and parse attributes
 		def servletContext = ServletContextHolder.servletContext
 		def storagePath = servletContext.getRealPath(FileUploadService.DATASET_UPLOAD_DIRECTORY)
 		File f = new File("${storagePath}/${filename}")
-		DatasetAttributeParser dap = new DatasetAttributeParser(f)
-
+		def missingValuePattern = params.get(Dataset.MISSING_VALUE_PATTERN_VAR)
+		
 		//initialize dataset instance
 		def datasetInstance = new Dataset()
 		datasetInstance.setTitle(params.get(Dataset.TITLE_VAR))
 		datasetInstance.setDataFile(filename);
 		datasetInstance.setDescription(params.get(Dataset.DESCRIPTION_VAR))
-		def missingValuePattern = params.get(Dataset.MISSING_VALUE_PATTERN_VAR)
 		datasetInstance.setMissingValuePattern(missingValuePattern)
 		datasetInstance.setNumberOfMissingValues(getNumberOfMissingValues(file, missingValuePattern));
-		datasetInstance.setNumberOfInstances(getNumberOfInstances(file))
+		datasetInstance.setNumberOfInstances(numberOfInstances)
+		
+		DatasetAttributeParser dap = new DatasetAttributeParser(f, numberOfInstances, missingValuePattern)
+		List<Attribute> attrs = dap.getAttributes()
+		for(int i = 0; i < attrs.size(); i++){
+		def attr = attrs.get(i)
+			datasetInstance.addToAttributes(attr)
+		}
 		
 		//parse file and get attributes
 //		datasetInstance.
