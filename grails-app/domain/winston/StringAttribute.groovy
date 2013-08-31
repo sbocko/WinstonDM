@@ -1,6 +1,7 @@
 package winston
 
 class StringAttribute extends Attribute{
+	int numberOfDistinctValues
 
     static constraints = {
     }

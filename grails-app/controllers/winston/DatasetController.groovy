@@ -1,11 +1,11 @@
 package winston
 
-import org.codehaus.groovy.grails.web.context.ServletContextHolder;
+import org.codehaus.groovy.grails.web.context.ServletContextHolder
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.util.StringUtils
 import org.springframework.web.multipart.MultipartFile
 
-import sk.upjs.winston.groovy.AttributeType;
+import sk.upjs.winston.groovy.DatasetAttributeParser
 import sk.upjs.winston.groovy.FileUploadService
 
 class DatasetController {
@@ -33,6 +33,12 @@ class DatasetController {
 			filename = file.getOriginalFilename();
 			println "filename: ${filename}"
 		}
+		
+		//get storage path and parse attributes
+		def servletContext = ServletContextHolder.servletContext
+		def storagePath = servletContext.getRealPath(FileUploadService.DATASET_UPLOAD_DIRECTORY)
+		File f = new File("${storagePath}/${filename}")
+		DatasetAttributeParser dap = new DatasetAttributeParser(f)
 
 		//initialize dataset instance
 		def datasetInstance = new Dataset()
