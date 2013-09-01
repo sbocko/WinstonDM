@@ -4,99 +4,138 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class AttributeController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index() {
-        redirect(action: "list", params: params)
-    }
+	def index() {
+		redirect(action: "list", params: params)
+	}
 
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [attributeInstanceList: Attribute.list(params), attributeInstanceTotal: Attribute.count()]
-    }
+	def list(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		[attributeInstanceList: Attribute.list(params), attributeInstanceTotal: Attribute.count()]
+	}
 
-    def create() {
-        [attributeInstance: new Attribute(params)]
-    }
+	def create() {
+		[attributeInstance: new Attribute(params)]
+	}
 
-    def save() {
-        def attributeInstance = new Attribute(params)
-        if (!attributeInstance.save(flush: true)) {
-            render(view: "create", model: [attributeInstance: attributeInstance])
-            return
-        }
+	def save() {
+		def attributeInstance = new Attribute(params)
+		if (!attributeInstance.save(flush: true)) {
+			render(view: "create", model: [attributeInstance: attributeInstance])
+			return
+		}
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'attribute.label', default: 'Attribute'), attributeInstance.id])
-        redirect(action: "show", id: attributeInstance.id)
-    }
+		flash.message = message(code: 'default.created.message', args: [
+			message(code: 'attribute.label', default: 'Attribute'),
+			attributeInstance.id
+		])
+		redirect(action: "show", id: attributeInstance.id)
+	}
 
-    def show(Long id) {
-        def attributeInstance = Attribute.get(id)
-        if (!attributeInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'attribute.label', default: 'Attribute'), id])
-            redirect(action: "list")
-            return
-        }
+	def show(Long id) {
+		def attributeInstance = Attribute.get(id)
+		if (!attributeInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'attribute.label', default: 'Attribute'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
+		/**
+		 * redirect to another page if attributeInstance is not default attribute
+		 */
+		if(attributeInstance.instanceOf(BooleanAttribute)){
+			redirect(controller: BooleanAttribute.class.getSimpleName(), action: "show", id: attributeInstance.id)
+			println "bool redirect"
+		}else if(attributeInstance.instanceOf(StringAttribute)){
+			redirect(controller: StringAttribute.class.getSimpleName(), action: "show", id: attributeInstance.id)
+			println "string redirect"
+		}else if(attributeInstance.instanceOf(NumericAttribute)){
+			redirect(controller: NumericAttribute.class.getSimpleName(), action: "show", id: attributeInstance.id)
+			println "numeric redirect"
+		}
 
-        [attributeInstance: attributeInstance]
-    }
 
-    def edit(Long id) {
-        def attributeInstance = Attribute.get(id)
-        if (!attributeInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'attribute.label', default: 'Attribute'), id])
-            redirect(action: "list")
-            return
-        }
+		[attributeInstance: attributeInstance]
+	}
 
-        [attributeInstance: attributeInstance]
-    }
+	def edit(Long id) {
+		def attributeInstance = Attribute.get(id)
+		if (!attributeInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'attribute.label', default: 'Attribute'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
 
-    def update(Long id, Long version) {
-        def attributeInstance = Attribute.get(id)
-        if (!attributeInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'attribute.label', default: 'Attribute'), id])
-            redirect(action: "list")
-            return
-        }
+		[attributeInstance: attributeInstance]
+	}
 
-        if (version != null) {
-            if (attributeInstance.version > version) {
-                attributeInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'attribute.label', default: 'Attribute')] as Object[],
-                          "Another user has updated this Attribute while you were editing")
-                render(view: "edit", model: [attributeInstance: attributeInstance])
-                return
-            }
-        }
+	def update(Long id, Long version) {
+		def attributeInstance = Attribute.get(id)
+		if (!attributeInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'attribute.label', default: 'Attribute'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
 
-        attributeInstance.properties = params
+		if (version != null) {
+			if (attributeInstance.version > version) {
+				attributeInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+						[
+							message(code: 'attribute.label', default: 'Attribute')] as Object[],
+						"Another user has updated this Attribute while you were editing")
+				render(view: "edit", model: [attributeInstance: attributeInstance])
+				return
+			}
+		}
 
-        if (!attributeInstance.save(flush: true)) {
-            render(view: "edit", model: [attributeInstance: attributeInstance])
-            return
-        }
+		attributeInstance.properties = params
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'attribute.label', default: 'Attribute'), attributeInstance.id])
-        redirect(action: "show", id: attributeInstance.id)
-    }
+		if (!attributeInstance.save(flush: true)) {
+			render(view: "edit", model: [attributeInstance: attributeInstance])
+			return
+		}
 
-    def delete(Long id) {
-        def attributeInstance = Attribute.get(id)
-        if (!attributeInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'attribute.label', default: 'Attribute'), id])
-            redirect(action: "list")
-            return
-        }
+		flash.message = message(code: 'default.updated.message', args: [
+			message(code: 'attribute.label', default: 'Attribute'),
+			attributeInstance.id
+		])
+		redirect(action: "show", id: attributeInstance.id)
+	}
 
-        try {
-            attributeInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'attribute.label', default: 'Attribute'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'attribute.label', default: 'Attribute'), id])
-            redirect(action: "show", id: id)
-        }
-    }
+	def delete(Long id) {
+		def attributeInstance = Attribute.get(id)
+		if (!attributeInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'attribute.label', default: 'Attribute'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
+
+		try {
+			attributeInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [
+				message(code: 'attribute.label', default: 'Attribute'),
+				id
+			])
+			redirect(action: "list")
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [
+				message(code: 'attribute.label', default: 'Attribute'),
+				id
+			])
+			redirect(action: "show", id: id)
+		}
+	}
 }

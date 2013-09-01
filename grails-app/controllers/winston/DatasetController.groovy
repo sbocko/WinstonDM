@@ -33,37 +33,35 @@ class DatasetController {
 			filename = file.getOriginalFilename();
 			println "filename: ${filename}"
 		}
-		
+
 		int numberOfInstances = getNumberOfInstances(file)
-		
+
 		//get storage path and parse attributes
 		def servletContext = ServletContextHolder.servletContext
 		def storagePath = servletContext.getRealPath(FileUploadService.DATASET_UPLOAD_DIRECTORY)
 		File f = new File("${storagePath}/${filename}")
 		def missingValuePattern = params.get(Dataset.MISSING_VALUE_PATTERN_VAR)
-		
+
 		//initialize dataset instance
-		def datasetInstance = new Dataset()
+		Dataset datasetInstance = new Dataset()
 		datasetInstance.setTitle(params.get(Dataset.TITLE_VAR))
 		datasetInstance.setDataFile(filename);
 		datasetInstance.setDescription(params.get(Dataset.DESCRIPTION_VAR))
 		datasetInstance.setMissingValuePattern(missingValuePattern)
 		datasetInstance.setNumberOfMissingValues(getNumberOfMissingValues(file, missingValuePattern));
 		datasetInstance.setNumberOfInstances(numberOfInstances)
-		
+
 		DatasetAttributeParser dap = new DatasetAttributeParser(f, numberOfInstances, missingValuePattern)
 		List<Attribute> attrs = dap.getAttributes()
 		for(int i = 0; i < attrs.size(); i++){
-		def attr = attrs.get(i)
+			def attr = attrs.get(i)
+			attr.save()
 			datasetInstance.addToAttributes(attr)
 		}
-		
+
 		//parse file and get attributes
-//		datasetInstance.
-		StringAttribute attr = new StringAttribute()
-		attr.setTitle("test")
-		datasetInstance.addToAttributes(attr)
-		
+
+
 		//println "dataset ${datasetInstance}"
 		println ""
 
@@ -189,27 +187,27 @@ class DatasetController {
 		//get storage path
 		def servletContext = ServletContextHolder.servletContext
 		def storagePath = servletContext.getRealPath(FileUploadService.DATASET_UPLOAD_DIRECTORY)
-		
+
 		def filename = multipartFile.getOriginalFilename()
 		File file = new File("${storagePath}/${filename}")
 		if(!file.exists()){
 			println "file ${file.getPath()} does not exists!"
 			return 0
 		}
-		
-		file.eachLine { line -> 
+
+		file.eachLine { line ->
 			if(line != null && line.trim().length() > 0){
 				result++
 			}
 		}
 		return result
 	}
-	
+
 	private void deleteDataFile(String filename){
 		//get storage path
 		def servletContext = ServletContextHolder.servletContext
 		def storagePath = servletContext.getRealPath(FileUploadService.DATASET_UPLOAD_DIRECTORY)
-		
+
 		File file = new File("${storagePath}/${filename}")
 		if(file.exists()){
 			file.delete()

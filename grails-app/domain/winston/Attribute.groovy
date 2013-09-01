@@ -11,6 +11,6 @@ class Attribute {
     }
 
     String toString(){
-    	return title
+    	return "${title} - missingValues: ${numberOfMissingValues}"
     }
 }

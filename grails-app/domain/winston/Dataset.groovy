@@ -15,6 +15,7 @@ class Dataset {
 	String missingValuePattern
 	int numberOfMissingValues
 	int numberOfInstances
+	List attributes
     static hasMany = [attributes: Attribute]
 
     static constraints = {

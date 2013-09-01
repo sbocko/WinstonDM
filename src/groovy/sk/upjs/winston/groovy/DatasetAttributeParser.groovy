@@ -1,8 +1,8 @@
 package sk.upjs.winston.groovy
 
-import sk.upjs.winston.groovy.validator.AttributeDataValidator;
 import sk.upjs.winston.groovy.validator.BooleanAttributeDataValidator
-import sk.upjs.winston.groovy.validator.DefaultAttributeDataValidator
+import sk.upjs.winston.groovy.validator.NumericAttributeDataValidator;
+import sk.upjs.winston.groovy.validator.StringAttributeDataValidator;
 import winston.Attribute
 
 class DatasetAttributeParser {
@@ -31,12 +31,16 @@ class DatasetAttributeParser {
 	}
 	
 	private Attribute createAttributeFromData(String[] attrData){
-		BooleanAttributeDataValidator badv = new BooleanAttributeDataValidator(attrData, missingValuePattern);
+		BooleanAttributeDataValidator badv = new BooleanAttributeDataValidator(attrData, missingValuePattern)
 		if(badv.isApplicableToData()){
 			return badv.createAttributeFromData()
 		}
+		NumericAttributeDataValidator nadv = new NumericAttributeDataValidator(attrData, missingValuePattern)
+		if(nadv.isApplicableToData()){
+			return nadv.createAttributeFromData()
+		}
 		
-		return new DefaultAttributeDataValidator(attrData, missingValuePattern).createAttributeFromData()
+		return new StringAttributeDataValidator(attrData, missingValuePattern).createAttributeFromData()
 	}
 
 	private String[][] parseDatasetToArrays(){

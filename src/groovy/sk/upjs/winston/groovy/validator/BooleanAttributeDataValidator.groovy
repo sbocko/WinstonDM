@@ -58,7 +58,6 @@ class BooleanAttributeDataValidator implements AttributeDataValidator{
 	private Map<String, Integer> countOccurences(){
 		Map<String, Integer> result = new HashMap<String, Integer>()
 		data.each {
-			println "ITERATOR: ${it}"
 			if(it == null){
 				return
 			}
