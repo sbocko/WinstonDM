@@ -25,6 +25,11 @@ class DatasetController {
 		[datasetInstance: new Dataset(params)]
 	}
 
+	/**
+	 * Parses form for creating new dataset, creates attributes and counts missing values...
+	 * Saves this dataset to database.
+	 * 
+	 */
 	def save() {
 		//get file
 		def file = request.getFile(Dataset.DATA_FILE_VAR)

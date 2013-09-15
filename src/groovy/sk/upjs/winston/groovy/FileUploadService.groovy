@@ -3,7 +3,12 @@ package sk.upjs.winston.groovy
 import org.codehaus.groovy.grails.web.context.ServletContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 
-
+/**
+ * 
+ * @author Stefan Bocko
+ * This class uploads file from form to the appropriate directory on the server.
+ *
+ */
 class FileUploadService {
 	public static final DATASET_UPLOAD_DIRECTORY = "datasets"
 

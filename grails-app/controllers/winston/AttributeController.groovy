@@ -33,6 +33,11 @@ class AttributeController {
 		redirect(action: "show", id: attributeInstance.id)
 	}
 
+	/**
+	 * This method will show attributes metadata when it is instance of Attribute.class. 
+	 * Otherwise it pass the attribute instance to appropriate controller and calls the show method.
+	 * @param	id	the attribute ID in database.
+	 */
 	def show(Long id) {
 		def attributeInstance = Attribute.get(id)
 		if (!attributeInstance) {
@@ -43,9 +48,7 @@ class AttributeController {
 			redirect(action: "list")
 			return
 		}
-		/**
-		 * redirect to another page if attributeInstance is not default attribute
-		 */
+
 		if(attributeInstance.instanceOf(BooleanAttribute)){
 			redirect(controller: BooleanAttribute.class.getSimpleName(), action: "show", id: attributeInstance.id)
 			println "bool redirect"

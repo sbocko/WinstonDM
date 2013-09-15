@@ -3,6 +3,12 @@ package sk.upjs.winston.groovy.validator
 import winston.Attribute;
 import winston.BooleanAttribute;
 
+/**
+ * 
+ * @author Stefan Bocko
+ * Data validator class for Boolean attribute types.
+ *
+ */
 class BooleanAttributeDataValidator implements AttributeDataValidator{
 	private static final String TRUE = "true"
 	private static final String FALSE = "false"

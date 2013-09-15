@@ -5,6 +5,12 @@ import java.util.Map;
 import winston.Attribute
 import winston.NumericAttribute;
 
+/**
+ *
+ * @author Stefan Bocko
+ * Data validator class for Numeric attribute types.
+ *
+ */
 class NumericAttributeDataValidator implements AttributeDataValidator {
 	private String[] data
 	private String missingValue

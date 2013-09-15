@@ -5,6 +5,12 @@ import sk.upjs.winston.groovy.validator.NumericAttributeDataValidator;
 import sk.upjs.winston.groovy.validator.StringAttributeDataValidator;
 import winston.Attribute
 
+/**
+ * 
+ * @author Stefan Bocko
+ * This class can parse data file and return List of Attributes of appropriate type.
+ *
+ */
 class DatasetAttributeParser {
 	public static final String DEFAULT_DELIMITER = ","
 	private File file

@@ -5,6 +5,13 @@ import java.util.Map;
 import winston.Attribute
 import winston.StringAttribute
 
+/**
+ *
+ * @author Stefan Bocko
+ * Data validator class for String attribute types. 
+ * This is general type and is always applicable.
+ *
+ */
 class StringAttributeDataValidator implements AttributeDataValidator {
 	private String[] data
 	private String missingValue
