@@ -22,7 +22,7 @@ class Dataset {
 	int numberOfMissingValues
 	int numberOfInstances
 	List attributes
-    static hasMany = [attributes: Attribute]
+    static hasMany = [attributes: Attribute, dmMethods: DMMethod]
 
     static constraints = {
     	title()
