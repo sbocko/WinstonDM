@@ -39,14 +39,18 @@ class DatasetController {
 			println "filename: ${filename}"
 		}
 
-		int numberOfInstances = getNumberOfInstances(file)
-
 		//get storage path and parse attributes
 		def servletContext = ServletContextHolder.servletContext
 		def storagePath = servletContext.getRealPath(FileUploadService.DATASET_UPLOAD_DIRECTORY)
-		File f = new File("${storagePath}/${filename}")
 		def missingValuePattern = params.get(Dataset.MISSING_VALUE_PATTERN_VAR)
-
+		
+		//upload file
+		def fileUploadService = new FileUploadService()
+		def filePath = fileUploadService.uploadFile(file, filename, FileUploadService.DATASET_UPLOAD_DIRECTORY)
+		File f = new File("${filePath}")
+		
+		int numberOfInstances = getNumberOfInstances(file)
+		
 		//initialize dataset instance
 		Dataset datasetInstance = new Dataset()
 		datasetInstance.setTitle(params.get(Dataset.TITLE_VAR))
@@ -56,6 +60,7 @@ class DatasetController {
 		datasetInstance.setNumberOfMissingValues(getNumberOfMissingValues(file, missingValuePattern));
 		datasetInstance.setNumberOfInstances(numberOfInstances)
 
+		//parse file and get attributes
 		DatasetAttributeParser dap = new DatasetAttributeParser(f, numberOfInstances, missingValuePattern)
 		List<Attribute> attrs = dap.getAttributes()
 		for(int i = 0; i < attrs.size(); i++){
@@ -64,15 +69,10 @@ class DatasetController {
 			datasetInstance.addToAttributes(attr)
 		}
 
-		//parse file and get attributes
-
-
 		//println "dataset ${datasetInstance}"
 		println ""
 
-		//upload file
-		def fileUploadService = new FileUploadService()
-		fileUploadService.uploadFile(file, filename, FileUploadService.DATASET_UPLOAD_DIRECTORY)
+
 
 		//if some error occures
 		if (!datasetInstance.save(flush: true)) {

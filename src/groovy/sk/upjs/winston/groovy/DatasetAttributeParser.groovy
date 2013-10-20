@@ -29,6 +29,7 @@ class DatasetAttributeParser {
 
 	public List<Attribute> getAttributes(){
 		List<Attribute> resultAttrs = new ArrayList<Attribute>()
+		println "PARSING..."
 		String[][] data = parseDatasetToArrays()
 		for(int i = 0; i < data.length; i++){
 			resultAttrs.add(createAttributeFromData(data[i]))
@@ -50,11 +51,13 @@ class DatasetAttributeParser {
 	}
 
 	private String[][] parseDatasetToArrays(){
+		println "ATTRIBUTES: ${numberOfAttributes} , INSTANCES: ${numberOfInstances}"
 		String[][] resultData = new String[numberOfAttributes][numberOfInstances]
 		int actLine = 0
 		file.eachLine { line ->
 			def values = line.split(delimiter)
 			values.eachWithIndex { val, idx ->
+				println "VALUE: ${val} , IDX: ${idx}"
 				resultData[idx][actLine] = val.trim()
 			}
 			actLine++ 

@@ -20,7 +20,7 @@ environments {
 //            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
 //        }
 		dataSource {
-			dbCreate = "create" // one of 'create', 'create-drop','update'
+			dbCreate = "create-drop" // one of 'create', 'create-drop','update'
 			url = "jdbc:mysql://stefanbocko.sk/nh2096401db?useUnicode=yes&characterEncoding=UTF-8"
 			username = "nh2096401"
 			password = "taraystol"

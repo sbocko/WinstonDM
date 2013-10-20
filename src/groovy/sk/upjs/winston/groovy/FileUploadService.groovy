@@ -31,10 +31,14 @@ class FileUploadService {
 			}
 		}
 		
+		println "storing file...";
+		
 //		Store file
 		if(!file.isEmpty()){
-			file.transferTo(new File("${storagePath}/${name}"))
-			println "Saved file ${storagePath}/${name}"
+			File uploadedFile = new File("${storagePath}/${name}")
+			file.transferTo(uploadedFile)
+			println "Saved file ${storagePath}/${name} - size: ${uploadedFile.size()}"
+			
 			return "${storagePath}/${name}"
 		}else{
 			println "File ${file} was empty!"
