@@ -11,7 +11,9 @@ import org.junit.*
 @TestFor(Dataset)
 class DatasetTests {
 
-    void testSomething() {
-       fail "Implement me"
+    void testToString() {
+		def datasetTitle = "Iris dataset"
+		Dataset dataset = new Dataset(title: datasetTitle);
+		assert dataset.toString() == "${datasetTitle}: null"
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 
  * @author Stefan Bocko
- * This class uploads file from form to the appropriate directory on the server.
+ * This class uploads file from user to the appropriate directory on the server.
  *
  */
 class FileUploadService {

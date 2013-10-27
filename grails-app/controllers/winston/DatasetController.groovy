@@ -11,6 +11,9 @@ import sk.upjs.winston.groovy.FileUploadService
 class DatasetController {
 
 	static allowedMethods = [save: "POST", delete: "POST"]
+	
+	def fileUploadService
+	def servletContext
 
 	def index() {
 		redirect(action: "list", params: params)
@@ -45,7 +48,7 @@ class DatasetController {
 		def missingValuePattern = params.get(Dataset.MISSING_VALUE_PATTERN_VAR)
 		
 		//upload file
-		def fileUploadService = new FileUploadService()
+		fileUploadService = new FileUploadService()
 		def filePath = fileUploadService.uploadFile(file, filename, FileUploadService.DATASET_UPLOAD_DIRECTORY)
 		File f = new File("${filePath}")
 		

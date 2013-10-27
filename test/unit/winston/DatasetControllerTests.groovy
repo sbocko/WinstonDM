@@ -2,17 +2,30 @@ package winston
 
 
 
-import org.junit.*
 import grails.test.mixin.*
+
+import org.junit.*
+import org.springframework.mock.web.MockMultipartFile
+import org.springframework.mock.web.MockMultipartHttpServletRequest
+
+import sk.upjs.winston.groovy.*
 
 @TestFor(DatasetController)
 @Mock(Dataset)
 class DatasetControllerTests {
+	
+	@Before
+	void setUp() {
+		//setup code is here
+	}
 
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        //Populate valid properties like...
+		params["title"] = 'DatasetController test'
+		params["dataFile"] = 'testDataset.data'
+		params["description"] = 'DatasetController test.'
+		params["missingValuePattern"] = ''
     }
 
     void testIndex() {
@@ -35,6 +48,15 @@ class DatasetControllerTests {
     }
 
     void testSave() {
+		def imgContentBytes = '123, false, aha\n' as byte[]
+		controller.metaClass.request = new MockMultipartHttpServletRequest()
+		controller.request.addFile(
+			new MockMultipartFile('dataFile','testDataset.data', 'image/jpeg', imgContentBytes)
+		)
+		
+		
+		
+		
         controller.save()
 
         assert model.datasetInstance != null
