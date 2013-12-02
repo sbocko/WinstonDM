@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+  <testsuite errors="1" failures="1" hostname="NB75" id="0" name="DatasetControllerTests" package="winston" tests="8" time="1.441" timestamp="2013-10-27T13:24:15">
+      <properties />
+
+      <testcase classname="winston.DatasetControllerTests" name="testIndex" time="0.467" />
+
+      <testcase classname="winston.DatasetControllerTests" name="testList" time="0.105" />
+
+      <testcase classname="winston.DatasetControllerTests" name="testCreate" time="0.091" />
+
+      <testcase classname="winston.DatasetControllerTests" name="testSave" time="0.114">
+          <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at sk.upjs.winston.groovy.FileUploadService$$EOLTUbOY.uploadFile(FileUploadService.groovy:22)
+	at winston.DatasetController.save(DatasetController.groovy:52)
+	at winston.DatasetControllerTests.testSave(DatasetControllerTests.groovy:60)
+</error>
+
+      </testcase>
+
+      <testcase classname="winston.DatasetControllerTests" name="testShow" time="0.18" />
+
+      <testcase classname="winston.DatasetControllerTests" name="testEdit" time="0.098" />
+
+      <testcase classname="winston.DatasetControllerTests" name="testUpdate" time="0.168">
+          <failure message="Assertion failed: &#xa;&#xa;assert view == &quot;/dataset/edit&quot;&#xa;       |    |&#xa;       null false&#xa;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Assertion failed: 
+
+assert view == &quot;/dataset/edit&quot;
+       |    |
+       null false
+
+	at winston.DatasetControllerTests.testUpdate(DatasetControllerTests.groovy:130)
+</failure>
+
+      </testcase>
+
+      <testcase classname="winston.DatasetControllerTests" name="testDelete" time="0.174" />
+
+      <system-out><![CDATA[--Output from testIndex--
+--Output from testList--
+--Output from testCreate--
+--Output from testSave--
+filename: testDataset.data
+--Output from testShow--
+--Output from testEdit--
+--Output from testUpdate--
+--Output from testDelete--
+]]></system-out>
+
+      <system-err><![CDATA[--Output from testIndex--
+--Output from testList--
+--Output from testCreate--
+--Output from testSave--
+--Output from testShow--
+--Output from testEdit--
+--Output from testUpdate--
+--Output from testDelete--
+]]></system-err>
+
+  </testsuite>
+</testsuites>
