@@ -57,7 +57,9 @@ class DatasetAttributeParser {
 		file.eachLine { line ->
 			def values = line.split(delimiter)
 			values.eachWithIndex { val, idx ->
+
 //				println "VALUE: ${val} , IDX: ${idx}"
+				
 				resultData[idx][actLine] = val.trim()
 			}
 			actLine++ 
