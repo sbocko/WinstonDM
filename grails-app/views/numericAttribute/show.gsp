@@ -40,6 +40,24 @@
 					
 				</li>
 				</g:if>
+				
+				<g:if test="${numericAttributeInstance?.minimum}">
+				<li class="fieldcontain">
+					<span id="minimum-label" class="property-label"><g:message code="numericAttribute.minimum.label" default="Minimum" /></span>
+					
+						<span class="property-value" aria-labelledby="minimum-label"><g:fieldValue bean="${numericAttributeInstance}" field="minimum"/></span>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${numericAttributeInstance?.maximum}">
+				<li class="fieldcontain">
+					<span id="maximum-label" class="property-label"><g:message code="numericAttribute.maximum.label" default="Maximum" /></span>
+					
+						<span class="property-value" aria-labelledby="maximum-label"><g:fieldValue bean="${numericAttributeInstance}" field="maximum"/></span>
+					
+				</li>
+				</g:if>
 			
 				<g:if test="${numericAttributeInstance?.dataset}">
 				<li class="fieldcontain">

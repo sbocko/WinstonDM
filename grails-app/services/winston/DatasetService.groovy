@@ -1,6 +1,7 @@
 package winston
 
 import org.codehaus.groovy.grails.web.context.ServletContextHolder
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile
 
 import sk.upjs.winston.groovy.DatasetAttributeParser
@@ -24,9 +25,9 @@ class DatasetService {
 		def storagePath = servletContext.getRealPath(FileUploadService.DATASET_UPLOAD_DIRECTORY)
 		
 		//upload file
-		fileUploadService = new FileUploadService()
-		def filePath = fileUploadService.uploadFile(file, filename, FileUploadService.DATASET_UPLOAD_DIRECTORY)
-		File f = new File("${filePath}")
+//		fileUploadService = new FileUploadService()
+//		def filePath = fileUploadService.uploadFile(file, filename, FileUploadService.DATASET_UPLOAD_DIRECTORY)
+//		File f = new File("${filePath}")
 		
 		int numberOfInstances = getNumberOfInstances(file)
 		
@@ -40,7 +41,7 @@ class DatasetService {
 		datasetInstance.setNumberOfInstances(numberOfInstances)
 
 		//parse file and get attributes
-		DatasetAttributeParser dap = new DatasetAttributeParser(f, numberOfInstances, missingValuePattern)
+		DatasetAttributeParser dap = new DatasetAttributeParser(file, numberOfInstances, missingValuePattern)
 		List<Attribute> attrs = dap.getAttributes()
 		for(int i = 0; i < attrs.size(); i++){
 			def attr = attrs.get(i)
@@ -61,6 +62,7 @@ class DatasetService {
 			return 0
 		}
 		def data = new String(file.getText())
+//		println "DATA SIZE: ${data.class}"
 		StringUtils.countOccurrencesOf(data,missingValuePattern)
 	}
 

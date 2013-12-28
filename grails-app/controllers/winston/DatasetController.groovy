@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile
 import sk.upjs.winston.groovy.DatasetAttributeParser
 
 class DatasetController {
-	DatasetService datasetService
+	def datasetService
 
 	static allowedMethods = [save: "POST", delete: "POST"]
 	

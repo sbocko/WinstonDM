@@ -50,6 +50,8 @@ class NumericAttributeDataValidator implements AttributeDataValidator {
 			resultAttr.setNumberOfMissingValues(0)
 		}
 		resultAttr.setAverage(getAverage(valuesMap))
+		resultAttr.setMinimum(getMinimum(valuesMap))
+		resultAttr.setMaximum(getMaximum(valuesMap))
 
 		return resultAttr
 	}
@@ -64,6 +66,30 @@ class NumericAttributeDataValidator implements AttributeDataValidator {
 		}
 
 		return sum/count
+	}
+
+	private double getMinimum(Map<String, Integer> values){
+		double minimum = Double.MAX_VALUE
+
+		for(entry in values){
+			if(Double.parseDouble(entry.key) < minimum){
+				minimum = Double.parseDouble(entry.key)
+			}
+		}
+
+		return minimum
+	}
+	
+	private double getMaximum(Map<String, Integer> values){
+		double maximum = Double.MIN_VALUE
+
+		for(entry in values){
+			if(Double.parseDouble(entry.key) > maximum){
+				maximum = Double.parseDouble(entry.key)
+			}
+		}
+
+		return maximum
 	}
 
 	private Map<String, Integer> countOccurences(){
