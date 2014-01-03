@@ -266,7 +266,7 @@ class BootStrap {
 			case 'isolet5.data':
 			//no missing values
 				break
-			case 'kddcup.data':
+			case 'kddcup_full.data':
 			//no missing values TODO OutOfMemoryError
 				return
 			case 'kddcup.data_10_percent':
@@ -548,8 +548,8 @@ class BootStrap {
 			//does not have appropriate data
 				return
 			case 'USCensus1990.data.txt':
-			//no missing values TODO OutOfMemory error
-				return
+			//no missing values - needs 12GB of RAM to parse
+				break
 			case 'USCensus1990raw.data.txt':
 			//does not have appropriate data
 				return
