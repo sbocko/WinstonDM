@@ -1,4 +1,4 @@
-"year,one, two three",age,marst,sex,people
+year,age,marst,sex,people
 1850,0,0,1,1483789
 1850,0,0,2,1450376
 1850,5,0,1,1411067

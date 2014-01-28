@@ -11,7 +11,7 @@ class DatasetController {
 	def datasetService
 
 	static allowedMethods = [save: "POST", delete: "POST"]
-	
+
 	def servletContext
 
 	def index() {
@@ -40,7 +40,7 @@ class DatasetController {
 		def missingValuePattern = params.get(Dataset.MISSING_VALUE_PATTERN_VAR)
 		def title = params.get(Dataset.TITLE_VAR)
 		def description = params.get(Dataset.DESCRIPTION_VAR)
-		
+
 		def datasetInstance = datasetService.saveDataset(title, description, myFile, missingValuePattern)
 
 		//println "dataset ${datasetInstance}"
@@ -119,6 +119,19 @@ class DatasetController {
 			datasetInstance.id
 		])
 		redirect(action: "show", id: datasetInstance.id)
+	}
+
+	def analyze(Long id) {
+		def datasetInstance = Dataset.get(id)
+		if (!datasetInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'dataset.label', default: 'Dataset'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
+		render(view: "analyze", model: [datasetInstance: datasetInstance])
 	}
 
 	def delete(Long id) {
