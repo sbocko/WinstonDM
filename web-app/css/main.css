@@ -567,14 +567,26 @@ th:hover, tr:hover {
 	text-decoration: underline;
 }
 
-.buttons .delete, .buttons .edit, .buttons .save, .buttons .analyze {
+.buttons .delete, .buttons .edit, .buttons .save, .buttons .analyze{
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
 }
 
-.ie6 .buttons input.delete, .ie6 .buttons input.edit, .ie6 .buttons input.save, .ie6 .buttons input.analyze,
-.ie7 .buttons input.delete, .ie7 .buttons input.edit, .ie7 .buttons input.save, .ie7 .buttons input.analyze {
+.buttons .back {
+	background-position: 0.6em center;
+	background-repeat: no-repeat;
+	text-indent: 25px;
+}
+
+.buttons .next {
+	background-position: 85% 50%;
+	background-repeat: no-repeat;
+	padding-right: 2.2em
+}
+
+.ie6 .buttons input.delete, .ie6 .buttons input.edit, .ie6 .buttons input.save, .ie6 .buttons input.analyze, .ie6 .buttons input.back, .ie6 .buttons input.next,
+.ie7 .buttons input.delete, .ie7 .buttons input.edit, .ie7 .buttons input.save, .ie7 .buttons input.analyze, .ie7 .buttons input.back, .ie7 .buttons input.next {
 	padding-left: 36px;
 }
 
@@ -594,7 +606,44 @@ th:hover, tr:hover {
 	background-image: url(../images/skin/information.png);
 }
 
+.buttons .back {
+	background-image: url(../images/custom/back.png);
+	background-size: 20px;
+}
+
+.buttons .next {
+	background-image: url(../images/custom/next.png);
+	background-size: 20px;
+}
+
 a.skip {
 	position: absolute;
 	left: -9999px;
+}
+
+.radio-button {
+	margin: 10px;
+	margin-left: 35px;
+}
+
+.choose-target-label {
+	margin-top: 10px;
+	margin-left: 30px;
+}
+
+.attribute-questions-description {
+	margin:30px;
+}
+
+.attribute-division-line {
+	margin-left:30px;
+	margin-right:30px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.attribute-question {
+	margin-left:30px;
+	margin-top:10px;
+	margin-bottom:10px;
 }

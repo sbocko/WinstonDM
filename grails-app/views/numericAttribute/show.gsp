@@ -68,11 +68,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${numericAttributeInstance?.distinctValues}">
+				<g:if test="${numericAttributeInstance?.numberOfDistinctValues}">
 				<li class="fieldcontain">
-					<span id="distinctValues-label" class="property-label"><g:message code="numericAttribute.distinctValues.label" default="Distinct Values" /></span>
+					<span id="numberOfDistinctValues-label" class="property-label"><g:message code="numericAttribute.numberOfDistinctValues.label" default="Distinct values" /></span>
 					
-						<span class="property-value" aria-labelledby="distinctValues-label"><g:fieldValue bean="${numericAttributeInstance}" field="distinctValues"/></span>
+						<span class="property-value" aria-labelledby="numberOfDistinctValues-label"><g:fieldValue bean="${numericAttributeInstance}" field="numberOfDistinctValues"/></span>
 					
 				</li>
 				</g:if>
@@ -82,6 +82,15 @@
 					<span id="numberOfMissingValues-label" class="property-label"><g:message code="numericAttribute.numberOfMissingValues.label" default="Number Of Missing Values" /></span>
 					
 						<span class="property-value" aria-labelledby="numberOfMissingValues-label"><g:fieldValue bean="${numericAttributeInstance}" field="numberOfMissingValues"/></span>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${numericAttributeInstance?.isTarget}">
+				<li class="fieldcontain">
+					<span id="isTarget-label" class="property-label"><g:message code="attribute.isTarget.label" default="Is target" /></span>
+					
+						<span class="property-value" aria-labelledby="isTarget-label"><g:fieldValue bean="${numericAttributeInstance}" field="isTarget"/></span>
 					
 				</li>
 				</g:if>

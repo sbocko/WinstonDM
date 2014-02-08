@@ -49,6 +49,7 @@ class NumericAttributeDataValidator implements AttributeDataValidator {
 		}else{
 			resultAttr.setNumberOfMissingValues(0)
 		}
+		resultAttr.setNumberOfDistinctValues(valuesMap.size())
 		resultAttr.setAverage(getAverage(valuesMap))
 		resultAttr.setMinimum(getMinimum(valuesMap))
 		resultAttr.setMaximum(getMaximum(valuesMap))

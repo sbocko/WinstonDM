@@ -425,8 +425,8 @@ class BootStrap {
 			//no missing values
 				break
 			case 'secom.data':
-			//no missing values??
-				break
+			//problem with saving NaN in SQL
+				return
 			case 'secom_labels.data':
 			//does not have data in correct format TODO change delimiter to comma
 				return
@@ -435,7 +435,7 @@ class BootStrap {
 			//no missing values
 				break
 			case 'semeion.data':
-			//does not have data in correct format TODO change delimiter to comma
+			//no missing values
 				break
 			case 'sensor_readings_2.data':
 			// no missing values

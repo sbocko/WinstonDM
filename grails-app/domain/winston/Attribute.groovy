@@ -10,6 +10,7 @@ package winston
 class Attribute {
 	String title
 	int numberOfMissingValues
+	boolean isTarget
 
 	static belongsTo = [dataset: Dataset]
 

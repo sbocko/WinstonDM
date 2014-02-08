@@ -46,7 +46,7 @@
 					
 						<td>${fieldValue(bean: numericAttributeInstance, field: "dataset")}</td>
 					
-						<td>${fieldValue(bean: numericAttributeInstance, field: "distinctValues")}</td>
+						<td>${fieldValue(bean: numericAttributeInstance, field: "numberOfDistinctValues")}</td>
 					
 						<td>${fieldValue(bean: numericAttributeInstance, field: "numberOfMissingValues")}</td>
 					

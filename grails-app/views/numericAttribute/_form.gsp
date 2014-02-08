@@ -26,12 +26,12 @@
 	<g:select id="dataset" name="dataset.id" from="${winston.Dataset.list()}" optionKey="id" required="" value="${numericAttributeInstance?.dataset?.id}" class="many-to-one"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: numericAttributeInstance, field: 'distinctValues', 'error')} required">
-	<label for="distinctValues">
-		<g:message code="numericAttribute.distinctValues.label" default="Distinct Values" />
+<div class="fieldcontain ${hasErrors(bean: numericAttributeInstance, field: 'numberOfDistinctValues', 'error')} required">
+	<label for="numberOfDistinctValues">
+		<g:message code="numericAttribute.numberOfDistinctValues.label" default="Distinct Values" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="distinctValues" type="number" value="${numericAttributeInstance.distinctValues}" required=""/>
+	<g:field name="numberOfDistinctValues" type="number" value="${numericAttributeInstance.numberOfDistinctValues}" required=""/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: numericAttributeInstance, field: 'numberOfMissingValues', 'error')} required">

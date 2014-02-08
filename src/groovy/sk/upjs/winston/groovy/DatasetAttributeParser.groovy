@@ -139,15 +139,14 @@ class DatasetAttributeParser {
 	 */
 	private List<String> parseStringToList(String line){
 		def list = new ArrayList<String>()
-		println "INITIAL LINE: ${line}"
 		while(line.length() != 0){
 			line = line.trim()
 			if(line.startsWith("\"")){
 				line = line.substring(1)
 				int endIdx = line.indexOf("\"")
 				list.add(line.substring(0, endIdx))
-				line = line.substring(endIdx)
-				line = line.substring(line.indexOf(delimiter)+1);
+				line = line.substring(endIdx+1)
+				line = line.substring(line.indexOf(delimiter)+1)
 			}else{
 				if(!line.contains(delimiter)){
 					list.add(line)
