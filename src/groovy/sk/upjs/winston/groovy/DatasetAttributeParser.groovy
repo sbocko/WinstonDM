@@ -37,32 +37,36 @@ class DatasetAttributeParser {
 		List<Attribute> resultAttrs = new ArrayList<Attribute>()
 		println "Parsing dataset."
 		String[][] data = parseDatasetToArrays()
-		for(int i = 0; i < data.length; i++){
-			resultAttrs.add(createAttributeFromData(data[i]))
+		for(int position = 0; position < data.length; position++){
+			resultAttrs.add(createAttributeFromData(data[position],position))
 		}
-		
+
 		if(hasAttributeTitlesInFirstLine){
 			addAttributeTitles(resultAttrs)
 		}
-		
+
 		println "Dataset parsed."
 		return resultAttrs
 	}
 
-	private Attribute createAttributeFromData(String[] attrData){
+	private Attribute createAttributeFromData(String[] attrData, int position){
+		Attribute attribute
 		BooleanAttributeDataValidator badv = new BooleanAttributeDataValidator(attrData, missingValuePattern)
-		if(badv.isApplicableToData()){
-			return badv.createAttributeFromData()
-		}
 		NumericAttributeDataValidator nadv = new NumericAttributeDataValidator(attrData, missingValuePattern)
-		if(nadv.isApplicableToData()){
-			return nadv.createAttributeFromData()
+		if(badv.isApplicableToData()){
+			attribute = badv.createAttributeFromData()
+		}else if(nadv.isApplicableToData()){
+			attribute = nadv.createAttributeFromData()
+		}else {
+			StringAttributeDataValidator sadv = new StringAttributeDataValidator(attrData, missingValuePattern)
+			attribute = sadv.createAttributeFromData()
 		}
 
-		return new StringAttributeDataValidator(attrData, missingValuePattern).createAttributeFromData()
+		attribute.setPositionInDataFile(position)
+		return attribute
 	}
 
-	private String[][] parseDatasetToArrays(){
+	public String[][] parseDatasetToArrays(){
 		println "ATTRIBUTES: ${numberOfAttributes} , INSTANCES: ${numberOfInstances}"
 		String[][] resultData = new String[numberOfAttributes][numberOfInstances]
 		int actLineIndex = 0
@@ -97,7 +101,7 @@ class DatasetAttributeParser {
 		def result = line.split(delimiter).length
 		return result
 	}
-	
+
 	private def calculateNumberOfInstances(){
 		def result = 0
 		if(hasFirstLineAttributeTitles()){
@@ -119,7 +123,9 @@ class DatasetAttributeParser {
 
 	private boolean hasFirstLineAttributeTitles(){
 		def line
-		file.withReader { line = it.readLine()}
+		file.withReader {
+			line = it.readLine()
+		}
 		def list = parseStringToList(line);
 		list.each { item ->
 			try{
@@ -158,7 +164,7 @@ class DatasetAttributeParser {
 		}
 		return list
 	}
-	
+
 	/*
 	 * This method reads the first line of dataset file 
 	 * which contains the attribute titles and assigns them 
@@ -169,7 +175,9 @@ class DatasetAttributeParser {
 	private List<Attribute> addAttributeTitles(List<Attribute> attributeList){
 		if(hasAttributeTitlesInFirstLine){
 			def line
-			file.withReader { line = it.readLine()}
+			file.withReader {
+				line = it.readLine()
+			}
 			def list = parseStringToList(line);
 			println "list size: ${list.size()} and data: ${list}"
 			list.eachWithIndex { item, idx ->
@@ -178,7 +186,7 @@ class DatasetAttributeParser {
 		}
 		return attributeList
 	}
-	
+
 	public def getNumberOfInstances(){
 		return numberOfInstances
 	}

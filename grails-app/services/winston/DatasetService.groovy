@@ -30,9 +30,9 @@ class DatasetService {
 		def storagePath = servletContext.getRealPath(FileUploadService.DATASET_UPLOAD_DIRECTORY)
 
 		//upload file
-		//		fileUploadService = new FileUploadService()
-		//		def filePath = fileUploadService.uploadFile(file, filename, FileUploadService.DATASET_UPLOAD_DIRECTORY)
-		//		File f = new File("${filePath}")
+		fileUploadService = new FileUploadService()
+		def filePath = fileUploadService.uploadFile(file, filename, FileUploadService.DATASET_UPLOAD_DIRECTORY)
+		File f = new File("${filePath}")
 
 		//initialize dataset instance
 		Dataset datasetInstance = new Dataset()

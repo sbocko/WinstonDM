@@ -9,6 +9,7 @@ import sk.upjs.winston.groovy.DatasetAttributeParser
 
 class DatasetController {
 	def datasetService
+	def splitAttributeService
 	private static final double MIN_PERCENT_OF_DISTINCT_VALUES = 0.05
 
 	static allowedMethods = [save: "POST", delete: "POST"]
@@ -223,6 +224,32 @@ class DatasetController {
 		}
 		
 		redirect(action: "attributeAnalysis", id: params.id);
+	}
+	
+	def prepareData(Long id){
+		def datasetInstance = Dataset.get(id)
+		if (!datasetInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'dataset.label', default: 'Dataset'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
+		
+		/*
+		 * check which attributes will be splitted based on user input
+		 */
+		List<Attribute> attributesToSplit = new ArrayList<Attribute>()
+		datasetInstance.attributes.each { attr ->
+			if(params.get('radioGroup'+attr.getId()) == "1"){
+				attributesToSplit.add(attr)
+			}
+		}
+		println "${splitAttributeService.splitDatasetAttributesIntoFile(datasetInstance, attributesToSplit)}"
+		
+		
+		redirect(action: "attributeAnalysis", id: id)
 	}
 
 }

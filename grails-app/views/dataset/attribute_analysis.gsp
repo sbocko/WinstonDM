@@ -31,7 +31,7 @@
 				<p class="attribute-question"><%="Attribute: <b>${attr.title}</b>" %></p>
 				<p class="attribute-question">This attribute has only <%=attr.getNumberOfDistinctValues()%> different values. Are they independent and does not have any order?</p>
 			
-				<g:radioGroup name="${attr.title}RadioGroup"
+				<g:radioGroup name="radioGroup${attr.id}"
 					labels="['yes','no']"
 					values="[1,0]">
 						<p class="radio-button">
@@ -48,7 +48,7 @@
 				<g:link class="back" action="analyze" id="${datasetInstance?.id}">
 					<g:message code="default.button.back.label" default="Back" />
 				</g:link>
-				<g:actionSubmit class="next" action="attributeAnalysis"
+				<g:actionSubmit class="next" action="prepareData"
 					value="${message(code: 'default.button.next.label', default: 'Next')}" />
 			</fieldset>
 		</g:form>
