@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 class FileUploadService {
 //	public static final DATASET_UPLOAD_DIRECTORY = "/Volumes/Seagate HDD/winston/resources"
-	public static final DATASET_UPLOAD_DIRECTORY = "/datasets"
+	public static final String DATASET_UPLOAD_DIRECTORY = "/datasets"
 
 	boolean transactional = true
 	

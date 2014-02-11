@@ -240,14 +240,16 @@ class DatasetController {
 		/*
 		 * check which attributes will be splitted based on user input
 		 */
-		List<Attribute> attributesToSplit = new ArrayList<Attribute>()
+		Map<Attribute,Boolean> attributesToSplit = new HashMap<Attribute, Boolean>()
 		datasetInstance.attributes.each { attr ->
 			if(params.get('radioGroup'+attr.getId()) == "1"){
-				attributesToSplit.add(attr)
+				attributesToSplit.put(attr,true)
+			}else{
+				attributesToSplit.put(attr, false)
 			}
 		}
-		println "${splitAttributeService.splitDatasetAttributesIntoFile(datasetInstance, attributesToSplit)}"
 		
+		splitAttributeService.splitDatasetAttributesIntoFile(datasetInstance, attributesToSplit)
 		
 		redirect(action: "attributeAnalysis", id: id)
 	}

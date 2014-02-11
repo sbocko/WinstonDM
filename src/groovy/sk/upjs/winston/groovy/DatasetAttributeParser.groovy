@@ -66,6 +66,12 @@ class DatasetAttributeParser {
 		return attribute
 	}
 
+	/*
+	 * This method returns data from dataFile in two dimensional array. 
+	 * The first dimension represents the attributes and the second dimension 
+	 * represents concrete data of this attribute ordered from the beginning 
+	 * of the file. Moreover the order of the attributes is also preserved.
+	 */
 	public String[][] parseDatasetToArrays(){
 		println "ATTRIBUTES: ${numberOfAttributes} , INSTANCES: ${numberOfInstances}"
 		String[][] resultData = new String[numberOfAttributes][numberOfInstances]
