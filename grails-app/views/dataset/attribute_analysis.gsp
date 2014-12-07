@@ -29,7 +29,7 @@
 
 			<% attrIdList.each { attr -> %>
 				<p class="attribute-question"><%="Attribute: <b>${attr.title}</b>" %></p>
-				<p class="attribute-question">This attribute has only <%=attr.getNumberOfDistinctValues()%> different values. Are they independent and does not have any order?</p>
+				<p class="attribute-question">This attribute has only <%=attr.getNumberOfDistinctValues()%> different values. Are they independent and do not have any order?</p>
 			
 				<g:radioGroup name="radioGroup${attr.id}"
 					labels="['yes','no']"

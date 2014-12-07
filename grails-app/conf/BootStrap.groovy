@@ -11,8 +11,8 @@ class BootStrap {
 	def grailsApplication
 
 	def init = { servletContext ->
-		def datasetList = Dataset.getAll()
-		def datasetNameList = datasetList.collect { entry -> entry.title }
+//		def datasetList = Dataset.getAll()
+//		def datasetNameList = datasetList.collect { entry -> entry.title }
 
 		//		def resourceDir = grailsApplication.mainContext.getResource('/datasets').file
 		def resourceDir = new File('/Volumes/Seagate HDD/datasets/')

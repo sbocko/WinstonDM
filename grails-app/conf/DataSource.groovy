@@ -16,7 +16,7 @@ hibernate {
 environments {
     development {
 //        dataSource {
-//            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+//            dbCreate = "create" // one of 'create', 'create-drop', 'update', 'validate', ''
 //            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
 //        }
 		dataSource {
@@ -24,6 +24,9 @@ environments {
 			url = "jdbc:mysql://stefanbocko.sk/nh2096401db?useUnicode=yes&characterEncoding=UTF-8"
 			username = "nh2096401"
 			password = "taraystol"
+//			url = "localhost"
+//			username = "bocko"
+//			password = "n3RaDwEUyDSwqREC"
 		}
 		hibernate {
 			show_sql = true
@@ -36,20 +39,26 @@ environments {
         }
     }
     production {
-        dataSource {
-            dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-            pooled = true
-            properties {
-               maxActive = -1
-               minEvictableIdleTimeMillis=1800000
-               timeBetweenEvictionRunsMillis=1800000
-               numTestsPerEvictionRun=3
-               testOnBorrow=true
-               testWhileIdle=true
-               testOnReturn=true
-               validationQuery="SELECT 1"
-            }
-        }
+//        dataSource {
+//            dbCreate = "update"
+//            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+//            pooled = true
+//            properties {
+//               maxActive = -1
+//               minEvictableIdleTimeMillis=1800000
+//               timeBetweenEvictionRunsMillis=1800000
+//               numTestsPerEvictionRun=3
+//               testOnBorrow=true
+//               testWhileIdle=true
+//               testOnReturn=true
+//               validationQuery="SELECT 1"
+//            }
+//        }
+		dataSource {
+			dbCreate = "update" // one of 'create', 'create-drop','update'
+			url = "jdbc:mysql://stefanbocko.sk/nh2096401db?useUnicode=yes&characterEncoding=UTF-8"
+			username = "nh2096401"
+			password = "taraystol"
+		}
     }
 }
