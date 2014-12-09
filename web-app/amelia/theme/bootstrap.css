@@ -4369,6 +4369,7 @@ a.list-group-item.active > .badge,
 
 .jumbotron-custom {
   padding: 10px;
+  margin-bottom: 20px;
   color: inherit;
   background-color: #0d747c;
 }
@@ -5879,4 +5880,13 @@ legend {
 
 .body-bottom-padding {
 	padding-bottom:25px;
+}
+
+.centered {
+	float: center;
+	margin: 0 auto;
+}
+
+.to-right {
+	float: right;
 }

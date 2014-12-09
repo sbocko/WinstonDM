@@ -1,5 +1,6 @@
 package winston
 
+import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.web.context.ServletContextHolder
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.util.StringUtils
@@ -7,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile
 
 import sk.upjs.winston.groovy.DatasetAttributeParser
 
+@Secured(['ROLE_USER'])
 class DatasetController {
 	def datasetService
 	def splitAttributeService
