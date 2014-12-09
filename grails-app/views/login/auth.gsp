@@ -43,7 +43,7 @@
 				<p>${flash.message}</p>
 			</div>
 		</g:if>
-
+		<h1 class="text-center">Please sign in</h1>
 		<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
 			<p>
 				<input type='text' class='form-control' name='j_username' id='username' placeholder="Email"/>
