@@ -27,6 +27,12 @@
 			<div class="navbar-collapse collapse" id="navbar-main">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="http://data-mining.sk/web/" target="_blank">About</a></li>
+					<sec:ifLoggedIn>
+						<li><g:link controller="logout" >Log out</g:link></li>
+					</sec:ifLoggedIn>
+					<sec:ifNotLoggedIn>
+						<li><g:link controller="login" action="auth">Log in</g:link></li>
+					</sec:ifNotLoggedIn>
 				</ul>
 			</div>
 		</div>

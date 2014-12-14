@@ -29,10 +29,10 @@ class LoginController {
 	 */
 	def index = {
 		if (springSecurityService.isLoggedIn()) {
-			redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
+			redirect(controller: "Dataset", action: "list")
 		}
 		else {
-			redirect action: 'auth', params: params
+			redirect(action: "auth", params: params)
 		}
 	}
 
@@ -44,7 +44,7 @@ class LoginController {
 		def config = SpringSecurityUtils.securityConfig
 
 		if (springSecurityService.isLoggedIn()) {
-			redirect uri: config.successHandler.defaultTargetUrl
+			redirect(controller: "Dataset", action: "list")
 			return
 		}
 
@@ -52,6 +52,12 @@ class LoginController {
 		String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
 		render view: view, model: [postUrl: postUrl,
 		                           rememberMeParameter: config.rememberMe.parameter]
+	}
+	
+	def register = {
+		
+		String view = 'register'
+		render view: view
 	}
 
 	/**

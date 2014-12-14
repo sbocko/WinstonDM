@@ -1,6 +1,10 @@
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
+import sk.upjs.winston.WinstonRole
+import sk.upjs.winston.WinstonUser
+import sk.upjs.winston.WinstonUserWinstonRole;
+
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 import winston.*
@@ -13,6 +17,12 @@ class BootStrap {
 	def init = { servletContext ->
 //		def datasetList = Dataset.getAll()
 //		def datasetNameList = datasetList.collect { entry -> entry.title }
+//		def userRole = new WinstonRole(authority: 'ROLE_USER').save(flush: true)
+//    	def testUser = new WinstonUser(username: 'admin', enabled: true, password: 'admin')
+//    	testUser.save(flush: true)
+//		def testUser = WinstonUser.findByUsername('admin')
+//		def userRole = WinstonRole.findByAuthority(WinstonRole.ROLE_USER)
+//		WinstonUserWinstonRole.create testUser, userRole, true
 
 		//		def resourceDir = grailsApplication.mainContext.getResource('/datasets').file
 		def resourceDir = new File('/Volumes/Seagate HDD/datasets/')
