@@ -65,7 +65,7 @@
 
 </div>
 	<p class="text-center">
-		Don't have an account? <a href="/winston/login/register">Click here</a>
+		Don't have an account? <g:link controller="register" >Click here</g:link>
 	</p>
 
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>

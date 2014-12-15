@@ -53,12 +53,6 @@ class LoginController {
 		render view: view, model: [postUrl: postUrl,
 		                           rememberMeParameter: config.rememberMe.parameter]
 	}
-	
-	def register = {
-		
-		String view = 'register'
-		render view: view
-	}
 
 	/**
 	 * The redirect action for Ajax requests.

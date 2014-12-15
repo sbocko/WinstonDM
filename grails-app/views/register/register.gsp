@@ -27,6 +27,12 @@
 			<div class="navbar-collapse collapse" id="navbar-main">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="http://data-mining.sk/web/" target="_blank">About</a></li>
+					<sec:ifLoggedIn>
+						<li><g:link controller="logout" >Log out</g:link></li>
+					</sec:ifLoggedIn>
+					<sec:ifNotLoggedIn>
+						<li><g:link controller="login" action="auth">Log in</g:link></li>
+					</sec:ifNotLoggedIn>
 				</ul>
 			</div>
 		</div>
@@ -43,22 +49,22 @@
 			</div>
 		</g:if>
 		<h1 class="text-center">Create an account</h1>
-		<form action='${postUrl}' method='POST' id='registerForm' autocomplete='off'>
+		<g:form action='registerUser' method='POST' id='registerForm' autocomplete='off'>
 			<p>
-				<input type='text' class='form-control' name='j_username' id='username' placeholder="Email"/>
+				<g:field type='email' class='form-control' name='email' placeholder="Email"/>
 			</p>
 
 			<p>
-				<input type='password' class='form-control' name='j_password' placeholder="<g:message code="springSecurity.login.password.label"/>"/>
+				<g:field type='password' class='form-control' name='password' placeholder="Password"/>
 			</p>
 			
 			<p>
-				<input type='password' class='form-control' name='j_password' placeholder="Retype password"/>
+				<g:field type='password' class='form-control' name='password_again' placeholder="Retype password"/>
 			</p>
 
 			<input type='submit' class="btn btn-primary" id="submit" value='Register'/>
 			
-		</form>
+		</g:form>
 	</div>
 
 </div>
